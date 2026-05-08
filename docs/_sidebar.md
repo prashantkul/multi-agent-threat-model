@@ -1,7 +1,13 @@
 - [Overview](/)
-- **Layer Details**
+- **Single-Agent Layers**
   - [Layer 0 — Foundation Model](layer-0-foundation-model.md)
   - [Layer 1 — Agent Runtime](layer-1-agent-runtime.md)
   - [Layer 2 — Tool Integration](layer-2-tool-integration.md)
   - [Layer 3 — Orchestration](layer-3-orchestration.md)
   - [Layer 4 — External Interface](layer-4-external-interface.md)
+- **Multi-Agent Threats**
+  - [Multi-Agent Overview](multi-agent-overview.md)
+  - [Communication Channels](multi-agent-communication.md)
+  - [Delegation Chains](multi-agent-delegation.md)
+  - [Shared State](multi-agent-shared-state.md)
+  - [Architecture Patterns](multi-agent-patterns.md)
