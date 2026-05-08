@@ -141,6 +141,10 @@ In this diagram, Agent A checks the shared state (step 1), Agent B modifies the 
 | **TMA-S9** | State exfiltration | An agent reads sensitive state from another agent's scope in shared storage and transmits it outside the system via tool calls, output channels, or further writes to accessible stores. | Information Disclosure | High | An agent with broad read permissions on shared state identifies and extracts sensitive information (credentials, PII, proprietary data) written by other agents, then exfiltrates it through available output channels. |
 | **TMA-S10** | Rollback attack | An attacker reverts shared state to a prior version that contains known vulnerabilities, expired permissions, or outdated configuration. The rollback undoes security patches or permission revocations that were applied to the shared state. | Tampering | High | An agent with write access to a versioned shared store issues a rollback or restore operation, reverting the state to a prior snapshot. This can restore revoked API keys, re-enable disabled features, or undo security-critical configuration changes. |
 
+> **Cross-reference:** RAG corpus poisoning is also covered from the single-agent perspective in [Layer 1 — T1.7](layer-1-agent-runtime.md) and [Layer 2 — T2.12](layer-2-tool-integration.md). TMA-S6 addresses the multi-agent shared corpus variant.
+
+> **Cross-reference:** Cross-agent data leakage (TMA-S3, TMA-S9) overlaps with [Communication — TMA-C8](multi-agent-communication.md) which covers the message-channel vector for the same class of threat.
+
 ---
 
 ## 5. Attack Scenarios

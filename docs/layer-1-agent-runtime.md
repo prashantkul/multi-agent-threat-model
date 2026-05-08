@@ -82,6 +82,8 @@ flowchart LR
 | **T1.7** | RAG Poisoning | Adversarial content planted in the retrieval corpus so that it surfaces during retrieval-augmented generation. Unlike T1.1, the focus here is on compromising the data source itself rather than a single document. | Tampering | **Critical** | SEO-style poisoning of indexed web content; compromised internal knowledge bases; adversarial contributions to shared document stores |
 | **T1.8** | Instruction Hierarchy Violation | Exploiting ambiguity in how the runtime separates system, developer, and user instructions. The attacker crafts input that the model interprets as having system-level or developer-level authority. | Elevation of Privilege | **High** | Role tag injection (e.g., inserting fake `[SYSTEM]` markers); exploiting inconsistent delimiter handling; leveraging model's tendency to follow the most recent instruction |
 
+> **Cross-reference:** RAG poisoning (T1.7) is also covered from the tool integration perspective in [Layer 2 — T2.12](layer-2-tool-integration.md) and the multi-agent shared state perspective in [Shared State — TMA-S6](multi-agent-shared-state.md).
+
 ---
 
 ## 4. Attack Scenarios
@@ -311,7 +313,7 @@ flowchart LR
 
 ### Likelihood vs. Impact Assessment
 
-| Threat ID | Threat | Likelihood | Impact | Risk Rating |
+| Threat ID | Threat | Likelihood | Impact | Risk Level |
 |---|---|---|---|---|
 | **T1.1** | Indirect Prompt Injection | **High** -- trivial to execute if RAG is present | **Critical** -- full behavior hijack | **Critical** |
 | **T1.2** | Context Window Poisoning | **Medium** -- requires sustained interaction or tool manipulation | **High** -- degrades instruction following | **High** |
@@ -355,7 +357,7 @@ Threats ranked by risk rating for remediation prioritization:
 
 ## References
 
-- Parent model: [Layered Agent Composition Threat Model](../agent-composition-threat-model.md)
+- Parent model: [Multi-Agent Threat Model](/)
 - STRIDE: Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege
 - OWASP Top 10 for LLM Applications (2025)
 - Greshake et al., "Not What You've Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection" (2023)

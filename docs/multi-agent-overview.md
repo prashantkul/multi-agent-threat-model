@@ -24,73 +24,7 @@ A single agent has a clear trust hierarchy: user instructs agent, agent uses too
 
 ## Architecture Patterns
 
-Multi-agent systems follow one of four primary patterns, each with a distinct threat profile. Real-world systems often combine them.
-
-```mermaid
-flowchart LR
-  subgraph HUB["Supervisor"]
-    direction TB
-    S["Supervisor"]
-    W1["Worker A"]
-    W2["Worker B"]
-    W3["Worker C"]
-    S --> W1
-    S --> W2
-    S --> W3
-  end
-
-  subgraph HIER["Hierarchical"]
-    direction TB
-    H1["Lead"]
-    H2["Sub-Lead A"]
-    H3["Sub-Lead B"]
-    H4["Worker 1"]
-    H5["Worker 2"]
-    H1 --> H2
-    H1 --> H3
-    H2 --> H4
-    H3 --> H5
-  end
-
-  subgraph MESH["Peer Mesh"]
-    direction TB
-    M1["Agent X"]
-    M2["Agent Y"]
-    M3["Agent Z"]
-    M1 --- M2
-    M2 --- M3
-    M3 --- M1
-  end
-
-  subgraph PIPE["Pipeline"]
-    direction LR
-    P1["Stage 1"]
-    P2["Stage 2"]
-    P3["Stage 3"]
-    P1 --> P2
-    P2 --> P3
-  end
-
-  style HUB fill:#f5f3ff,stroke:#8b5cf6,stroke-width:2px
-  style HIER fill:#eff6ff,stroke:#3b82f6,stroke-width:2px
-  style MESH fill:#fff7ed,stroke:#f97316,stroke-width:2px
-  style PIPE fill:#f0fdf4,stroke:#22c55e,stroke-width:2px
-  style S fill:#8b5cf6,color:#fff
-  style W1 fill:#c4b5fd,color:#000
-  style W2 fill:#c4b5fd,color:#000
-  style W3 fill:#c4b5fd,color:#000
-  style H1 fill:#3b82f6,color:#fff
-  style H2 fill:#60a5fa,color:#fff
-  style H3 fill:#60a5fa,color:#fff
-  style H4 fill:#93c5fd,color:#000
-  style H5 fill:#93c5fd,color:#000
-  style M1 fill:#f97316,color:#fff
-  style M2 fill:#f97316,color:#fff
-  style M3 fill:#f97316,color:#fff
-  style P1 fill:#22c55e,color:#fff
-  style P2 fill:#22c55e,color:#fff
-  style P3 fill:#22c55e,color:#fff
-```
+Multi-agent systems follow one of four primary patterns, each with a distinct threat profile. Real-world systems often combine them. See [Architecture Patterns](multi-agent-patterns.md) for full diagrams, per-pattern threat tables, and attack scenarios.
 
 | Pattern | Trust Model | Key Risk | Best For |
 |---------|------------|----------|----------|
@@ -98,8 +32,6 @@ flowchart LR
 | **Hierarchical** | Layered — trust attenuates down tree | Deep delegation chains | Complex workflows with sub-teams |
 | **Peer Mesh** | Mutual — no central authority | No central enforcement | Collaborative reasoning, debates |
 | **Pipeline** | Linear — each stage trusts the previous | Poisoned stage corrupts downstream | Sequential processing, ETL |
-
-> Detailed analysis of each pattern: [Architecture Patterns](multi-agent-patterns.md)
 
 ---
 
@@ -250,11 +182,15 @@ Multi-agent threats span three domains. Each is covered in depth in its own page
 | ID | Threat | Severity | Detail Page |
 |----|--------|----------|-------------|
 | TMA-C1 | Agent impersonation / spoofing | Critical | [Communication](multi-agent-communication.md) |
-| TMA-C2 | Message tampering in transit | High | [Communication](multi-agent-communication.md) |
+| TMA-C2 | Message tampering in transit | Critical | [Communication](multi-agent-communication.md) |
 | TMA-C3 | Message replay attacks | High | [Communication](multi-agent-communication.md) |
 | TMA-C4 | Eavesdropping between agents | High | [Communication](multi-agent-communication.md) |
 | TMA-C5 | Message bus injection | Critical | [Communication](multi-agent-communication.md) |
-| TMA-C6 | Channel flooding / DoS | Medium | [Communication](multi-agent-communication.md) |
+| TMA-C6 | Channel flooding / DoS | High | [Communication](multi-agent-communication.md) |
+| TMA-C7 | Deserialization attacks | Critical | [Communication](multi-agent-communication.md) |
+| TMA-C8 | Context leakage across boundaries | High | [Communication](multi-agent-communication.md) |
+| TMA-C9 | Protocol downgrade attacks | High | [Communication](multi-agent-communication.md) |
+| TMA-C10 | Man-in-the-middle between agents | Critical | [Communication](multi-agent-communication.md) |
 
 ### Delegation Threats
 
@@ -266,6 +202,10 @@ Multi-agent threats span three domains. Each is covered in depth in its own page
 | TMA-D4 | Delegation chain opacity | High | [Delegation](multi-agent-delegation.md) |
 | TMA-D5 | Recursive delegation loop | High | [Delegation](multi-agent-delegation.md) |
 | TMA-D6 | Result tampering in responses | High | [Delegation](multi-agent-delegation.md) |
+| TMA-D7 | Scope creep in delegation | Medium | [Delegation](multi-agent-delegation.md) |
+| TMA-D8 | Revocation failure | High | [Delegation](multi-agent-delegation.md) |
+| TMA-D9 | Cross-boundary delegation | Critical | [Delegation](multi-agent-delegation.md) |
+| TMA-D10 | Phantom delegation | High | [Delegation](multi-agent-delegation.md) |
 
 ### Shared State Threats
 
@@ -277,6 +217,10 @@ Multi-agent threats span three domains. Each is covered in depth in its own page
 | TMA-S4 | State corruption cascade | Critical | [Shared State](multi-agent-shared-state.md) |
 | TMA-S5 | Unauthorized state modification | High | [Shared State](multi-agent-shared-state.md) |
 | TMA-S6 | Vector database poisoning | Critical | [Shared State](multi-agent-shared-state.md) |
+| TMA-S7 | Configuration tampering | Critical | [Shared State](multi-agent-shared-state.md) |
+| TMA-S8 | Stale state exploitation | Medium | [Shared State](multi-agent-shared-state.md) |
+| TMA-S9 | State exfiltration | High | [Shared State](multi-agent-shared-state.md) |
+| TMA-S10 | Rollback attacks | High | [Shared State](multi-agent-shared-state.md) |
 
 ---
 
@@ -413,14 +357,7 @@ flowchart LR
   style R3 fill:#ef4444,color:#fff
 ```
 
-### Blast Radius by Pattern
-
-| Pattern | Blast Radius | Cascade Speed | Recovery |
-|---------|-------------|---------------|----------|
-| **Supervisor** | Total if supervisor compromised; isolated if worker | Instant (supervisor), contained (worker) | Replace supervisor / isolate worker |
-| **Hierarchical** | Subtree below compromised node | Propagates down the tree | Prune subtree, rebuild |
-| **Peer Mesh** | Potentially total — no containment boundary | Fast — direct connections to all peers | Difficult — no isolation mechanism |
-| **Pipeline** | All downstream stages | Sequential — stage by stage | Restart from last clean stage |
+See the [pattern comparison matrix](multi-agent-patterns.md) for a full blast radius analysis by architecture type.
 
 ---
 

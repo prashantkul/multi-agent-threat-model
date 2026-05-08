@@ -325,7 +325,7 @@ flowchart LR
 
 The following matrix plots each threat by likelihood of exploitation and impact if successful. Severity is the composite assessment.
 
-| Threat ID | Threat | Likelihood | Impact | Severity |
+| Threat ID | Threat | Likelihood | Impact | Risk Level |
 |---|---|---|---|---|
 | T4.1 | Direct prompt injection | High | Critical | **Critical** |
 | T4.2 | Authentication bypass | Medium | Critical | **Critical** |
@@ -365,4 +365,4 @@ Based on the risk matrix, the recommended mitigation priority is:
 - [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
 - [STRIDE Threat Model](https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-threats)
 - [OAuth 2.0 Security Best Current Practice (RFC 9700)](https://datatracker.ietf.org/doc/html/rfc9700)
-- Parent document: [Layered Agent Composition Threat Model](../agent-composition-threat-model.md)
+- Parent model: [Multi-Agent Threat Model](/)

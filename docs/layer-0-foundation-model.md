@@ -1,6 +1,6 @@
 # Layer 0: Foundation Model -- Threat Model
 
-> Part of the [Layered Agent Composition Threat Model](../agent-composition-threat-model.md)
+> Part of [Multi-Agent Threat Model](/)
 
 ---
 

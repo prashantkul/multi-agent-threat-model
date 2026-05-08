@@ -216,6 +216,10 @@ The gap between these two models is where every delegation attack lives. When tr
 | **TMA-D9** | Cross-boundary delegation | An agent in a trusted internal zone delegates to an agent in an untrusted external zone (or vice versa), violating network and trust zone segmentation. Sensitive data or elevated capabilities cross trust boundaries through the delegation channel. | Information Disclosure | Critical | Delegation routing that does not enforce trust zone boundaries. An internal agent delegates a data analysis task to an external agent, sending proprietary data across the boundary. No zone-aware routing policy exists. |
 | **TMA-D10** | Phantom delegation | An agent claims to be acting on behalf of another agent (or the user) without having received a legitimate delegation. The agent fabricates delegation credentials or simply asserts delegated authority that it does not possess. | Spoofing | High | Absence of cryptographically signed delegation tokens. Agents accept delegation claims based on self-assertion rather than verifiable proof. A rogue agent can impersonate any principal in the system. |
 
+> **Cross-reference:** Threats TMA-D1 through TMA-D3 expand on Layer 3's T3.5 (delegation chain exploitation), and TMA-D5 expands on T3.8 (recursive decomposition). See [Layer 3 — Orchestration](layer-3-orchestration.md) for the single-agent perspective. Controls CD-03 and CD-05 correspond to Layer 3's C3.9 and C3.10.
+
+> **Cross-reference:** Agent impersonation at the message level is covered in [Communication — TMA-C1](multi-agent-communication.md). TMA-D10 addresses the delegation-specific variant.
+
 ---
 
 ## 5. Attack Scenarios

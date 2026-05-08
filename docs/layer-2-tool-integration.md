@@ -162,6 +162,8 @@ MCP server spoofing is particularly dangerous because agents rely on tool descri
 | T2.11 | Webhook replay attacks | Captured webhook payloads from API gateway tools are replayed to re-trigger agent actions or duplicate side effects. | Tampering | Medium | Network interception of outbound webhook calls, or log access revealing prior webhook payloads. |
 | T2.12 | RAG retrieval poisoning | Adversarial documents are planted in the retrieval corpus so that they are returned by vector search and inject malicious instructions into agent context. | Tampering | High | Write access to the document store, vector database, or ingestion pipeline used by the RAG system. |
 
+> **Cross-reference:** RAG poisoning is also covered from the agent runtime perspective in [Layer 1 — T1.7](layer-1-agent-runtime.md) and the multi-agent shared state perspective in [Shared State — TMA-S6](multi-agent-shared-state.md).
+
 ---
 
 ## 5. Attack Scenarios

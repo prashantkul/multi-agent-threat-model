@@ -214,95 +214,29 @@ flowchart LR
 
 ## Tool Integration Threat Surface
 
-The tool layer bridges the AI system with real-world side effects. Each tool type has a corresponding threat vector and required control.
-
-```mermaid
-flowchart LR
-  subgraph TOOLS["Tool Components"]
-    T1["MCP Server"]
-    T2["Native Tools"]
-    T3["API Gateway"]
-    T4["Code Executor"]
-    T5["File I/O"]
-  end
-
-  subgraph THREATS["Threat Vectors"]
-    X1["Server Spoofing"]
-    X2["Privilege Escalation"]
-    X3["Data Exfiltration"]
-    X4["Injection via Output"]
-    X5["Path Traversal"]
-  end
-
-  subgraph CONTROLS["Security Controls"]
-    S1["Auth / mTLS"]
-    S2["Least Privilege"]
-    S3["Output Filtering"]
-    S4["Sandboxing"]
-    S5["Allowlists"]
-  end
-
-  T1 --> X1
-  T2 --> X2
-  T3 --> X3
-  T4 --> X4
-  T5 --> X5
-  X1 --> S1
-  X2 --> S2
-  X3 --> S3
-  X4 --> S4
-  X5 --> S5
-
-  style TOOLS fill:#f0fdf4,stroke:#22c55e,stroke-width:2px
-  style THREATS fill:#fef2f2,stroke:#ef4444,stroke-width:2px
-  style CONTROLS fill:#eff6ff,stroke:#3b82f6,stroke-width:2px
-  style T1 fill:#22c55e,color:#fff
-  style T2 fill:#22c55e,color:#fff
-  style T3 fill:#22c55e,color:#fff
-  style T4 fill:#22c55e,color:#fff
-  style T5 fill:#22c55e,color:#fff
-  style X1 fill:#ef4444,color:#fff
-  style X2 fill:#ef4444,color:#fff
-  style X3 fill:#ef4444,color:#fff
-  style X4 fill:#ef4444,color:#fff
-  style X5 fill:#ef4444,color:#fff
-  style S1 fill:#3b82f6,color:#fff
-  style S2 fill:#3b82f6,color:#fff
-  style S3 fill:#3b82f6,color:#fff
-  style S4 fill:#3b82f6,color:#fff
-  style S5 fill:#3b82f6,color:#fff
-```
+The tool layer is the highest-risk single-agent surface — it bridges AI with real-world side effects. See the [Layer 2 — Tool Integration](layer-2-tool-integration.md) page for the full threat catalog, MCP lifecycle analysis, and 3 detailed attack scenarios.
 
 ---
 
 ## Controls Matrix
 
+Each layer page contains a full controls and mitigations section. Key examples:
+
 | Layer | Control | Description |
 |-------|---------|-------------|
 | L4 | Input validation | Schema validation, length limits, content filtering |
-| L4 | Authentication | OAuth 2.0 / API keys with scoped permissions |
-| L4 | Rate limiting | Per-user and per-endpoint throttling |
-| L3 | Tool allowlists | Explicit list of permitted tools per agent role |
-| L3 | Decision logging | Immutable audit trail of routing and planning decisions |
-| L3 | Capability boundaries | Agents can only invoke tools in their declared scope |
 | L2 | MCP server auth | mTLS or token-based auth for all MCP connections |
-| L2 | Output sanitization | Strip or escape tool outputs before context injection |
-| L2 | Sandboxed execution | Code runs in isolated containers with no network |
-| L2 | Filesystem allowlists | Restrict file I/O to declared directory scopes |
-| L1 | Prompt assembly audit | Log and review assembled prompts for injection |
-| L1 | Context isolation | Separate user content from system instructions |
-| L1 | Memory validation | Verify memory entries before retrieval and injection |
 | L0 | Model provenance | Verify model checksums and supply chain integrity |
-| L0 | Output guardrails | Post-generation filtering for harmful or incorrect output |
+
+See each layer's detail page for the complete controls catalog.
 
 ---
 
-## Next Steps
+## What's Next
 
-This single-agent layered model is the foundation. Planned expansions:
+The multi-agent threat model is now live — covering [communication](multi-agent-communication.md), [delegation](multi-agent-delegation.md), [shared state](multi-agent-shared-state.md), and [architecture patterns](multi-agent-patterns.md).
 
-1. **Multi-Agent Threat Model** — Agent-to-agent communication, shared memory, delegation chains, confused deputy attacks
-2. **MCP Deep Dive** — Detailed threat model for MCP server lifecycle
-3. **API Surface Threat Model** — External API attack surface
-4. **Supply Chain Threats** — Model provenance, tool/plugin supply chain
-5. **Operational Threat Model** — Logging, monitoring, incident response
+Planned expansions:
+
+1. **Supply Chain Threats** — Model provenance, tool/plugin supply chain, dependency integrity
+2. **Operational Threat Model** — Logging, monitoring, incident response for agent systems in production

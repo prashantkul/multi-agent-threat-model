@@ -71,6 +71,8 @@ The following table catalogs the primary threats to the orchestration layer. Eac
 | **T3.7** | Decision audit gap | The orchestrator makes routing and planning decisions without producing an auditable trail. When an incident occurs, there is no record of why a particular agent was selected, why a task was decomposed in a certain way, or what data informed the decision. | Repudiation | Medium | Not a direct attack vector but an architectural weakness that prevents detection, forensics, and accountability for all other threats. |
 | **T3.8** | Recursive task decomposition | A crafted goal causes the task decomposer to enter infinite or deeply recursive decomposition. Each sub-task generates further sub-tasks without a termination condition, exhausting compute, memory, and API call budgets. | Denial of Service | High | Input that triggers self-referencing task definitions, circular dependencies in the execution plan, or sub-tasks that re-invoke the decomposer with equivalent goals. |
 
+> **Cross-reference:** Threats T3.5 (delegation chain exploitation) and T3.8 (recursive decomposition) are expanded in the multi-agent context in [Delegation Chains — TMA-D1 through TMA-D5](multi-agent-delegation.md). Controls C3.9 and C3.10 correspond to CD-03 and CD-05 in the delegation model.
+
 ---
 
 ## 4. Attack Scenarios
@@ -325,6 +327,6 @@ The highest-risk threats to the orchestration layer are **goal hijacking (T3.1)*
 
 ## References
 
-- Parent model: [Layered Agent Composition Threat Model](../agent-composition-threat-model.md)
+- Parent model: [Multi-Agent Threat Model](/)
 - STRIDE threat classification: Microsoft Threat Modeling methodology
 - Confused deputy problem: originally described by Norm Hardy (1988), applied here to multi-agent delegation chains

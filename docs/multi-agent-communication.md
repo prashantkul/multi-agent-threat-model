@@ -105,6 +105,8 @@ The following table catalogs the primary threats to multi-agent communication ch
 | **TMA-C9** | Protocol downgrade | An attacker forces agents to negotiate a less secure communication protocol or cipher suite. For example, downgrading from mTLS to plaintext HTTP, or from authenticated to anonymous connections. | Tampering | High | Missing strict transport security enforcement, agents that accept fallback protocols, MITM during protocol negotiation, misconfigured TLS settings that allow weak cipher suites. |
 | **TMA-C10** | Man-in-the-middle | An attacker positions themselves between two communicating agents, intercepting and optionally modifying all messages in both directions. Neither agent detects the interception. | Spoofing / Tampering | Critical | Missing mutual authentication (mTLS), DNS spoofing, ARP poisoning, compromised network infrastructure, agents that do not validate server certificates. |
 
+> **Cross-reference:** Data leakage across agent boundaries is also covered from the shared state perspective in [Shared State — TMA-S3 and TMA-S9](multi-agent-shared-state.md).
+
 ---
 
 ## 4. Attack Scenarios
@@ -172,6 +174,8 @@ flowchart LR
 **Impact:** Privilege escalation through indirect prompt injection. Sensitive credentials are exposed through the shared state layer. The attack chains a low-privilege write with a high-privilege read to achieve cross-boundary escalation.
 
 **Detection difficulty:** Very high. The adversarial content arrives through a legitimate data pipeline (web search results). Agent H is operating within its declared capabilities (reading context, accessing secrets). The attack is only visible by tracing the causal chain from the adversarial web page through the blackboard to the secrets exfiltration.
+
+> **Cross-reference:** Shared blackboard/state attacks are covered in depth in [Shared State — TMA-S1](multi-agent-shared-state.md). This scenario illustrates the communication channel vector for shared state poisoning.
 
 ```mermaid
 %%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#0d9488', 'lineColor': '#0d9488'}}}%%
