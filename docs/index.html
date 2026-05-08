@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multi-Agent Threat Model</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Layered threat model for AI agent systems">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
+  <style>
+    :root {
+      --base-font-size: 15px;
+      --theme-color: #8b5cf6;
+      --sidebar-width: 260px;
+      --sidebar-nav-link-color--active: #8b5cf6;
+      --sidebar-nav-link-border-color--active: #8b5cf6;
+      --sidebar-name-color: #1e293b;
+      --sidebar-name-font-weight: 700;
+      --heading-color: #1e293b;
+      --link-color: #7c3aed;
+      --link-color--hover: #6d28d9;
+      --blockquote-border-color: #8b5cf6;
+    }
+    .sidebar .app-name {
+      padding: 16px 0;
+    }
+    .markdown-section h1 {
+      border-bottom: 2px solid #8b5cf6;
+      padding-bottom: 8px;
+    }
+    .markdown-section h2 {
+      color: #4c1d95;
+    }
+    .markdown-section table {
+      display: table;
+      width: 100%;
+    }
+    .markdown-section table th {
+      background: #f5f3ff;
+      color: #4c1d95;
+      font-weight: 600;
+    }
+    .markdown-section table td,
+    .markdown-section table th {
+      padding: 8px 12px;
+      border: 1px solid #e2e8f0;
+    }
+    .markdown-section table tr:nth-child(even) {
+      background: #faf5ff;
+    }
+    .layer-nav {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin: 24px 0;
+    }
+    .layer-nav a {
+      display: block;
+      padding: 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 600;
+      text-align: center;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .layer-nav a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .layer-nav .l0 { background: #8b5cf6; }
+    .layer-nav .l1 { background: #3b82f6; }
+    .layer-nav .l2 { background: #22c55e; }
+    .layer-nav .l3 { background: #f97316; }
+    .layer-nav .l4 { background: #ef4444; }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    window.$docsify = {
+      name: 'Multi-Agent Threat Model',
+      repo: 'https://github.com/prashantkul/multi-agent-threat-model',
+      loadSidebar: true,
+      subMaxLevel: 3,
+      auto2top: true,
+      search: {
+        placeholder: 'Search threat model...',
+        noData: 'No results.',
+        depth: 3
+      },
+      markdown: {
+        renderer: {
+          // ensure mermaid blocks get picked up
+          code: function(code, lang) {
+            if (lang === 'mermaid') {
+              return '<div class="mermaid">' + code + '</div>';
+            }
+            return this.origin.code.apply(this, arguments);
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/js/docsify-themeable.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'base',
+      themeVariables: {
+        fontSize: '14px'
+      }
+    });
+
+    // Re-render mermaid after docsify page load
+    function renderMermaid() {
+      document.querySelectorAll('.mermaid').forEach(function(el, idx) {
+        if (el.getAttribute('data-processed')) return;
+        try {
+          var id = 'mermaid-' + Date.now() + '-' + idx;
+          mermaid.render(id, el.textContent).then(function(result) {
+            el.innerHTML = result.svg;
+            el.setAttribute('data-processed', 'true');
+          });
+        } catch (e) {
+          console.error('Mermaid render error:', e);
+        }
+      });
+    }
+
+    // Hook into docsify lifecycle
+    window.$docsify.plugins = [
+      function(hook) {
+        hook.doneEach(function() {
+          renderMermaid();
+        });
+      }
+    ];
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code@2/dist/docsify-copy-code.min.js"></script>
+</body>
+</html>
